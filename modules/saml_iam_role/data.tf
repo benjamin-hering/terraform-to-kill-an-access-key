@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 data "aws_iam_policy_document" "assume_role_saml" {
   statement {
     actions = ["sts:AssumeRoleWithSAML"]
@@ -15,3 +17,23 @@ data "aws_iam_policy_document" "assume_role_saml" {
   }
 }
 
+data "aws_iam_policy_document" "iam_pass_own_role" {
+  statement {
+    effect = "Allow"
+
+    actions = ["iam:PassRole"]
+
+    resources = [
+      "arn:aws:iam::${local.account_number}:role/${local.full_role_name}",
+      "arn:aws:iam::${local.account_number}:instance-profile/${local.full_role_name}*",
+    ]
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = ["iam:ListInstanceProfiles"]
+
+    resources = ["arn:aws:iam::${local.account_number}:instance-profile/*"]
+  }
+}
