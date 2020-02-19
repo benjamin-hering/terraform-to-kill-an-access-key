@@ -24,8 +24,8 @@ data "aws_iam_policy_document" "iam_pass_own_role" {
     actions = ["iam:PassRole"]
 
     resources = [
-      "arn:aws:iam::${local.account_number}:role/${local.full_role_name}",
-      "arn:aws:iam::${local.account_number}:instance-profile/${local.full_role_name}*",
+      "arn:aws:iam::${local.account_number}:role/${var.role_name}",
+      "arn:aws:iam::${local.account_number}:instance-profile/${var.role_name}*",
     ]
   }
 

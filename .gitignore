@@ -1,3 +1,9 @@
+# Pycharm files
+.idea
+
+# Example AWS config
+/example/example_aws_config
+
 # Local .terraform directories
 **/.terraform/*
 
